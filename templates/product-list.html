@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Lista produktów</h1>
+<div class="btn-group float-right" role="group" aria-label="Basic example">
+  <form action="/export">
+    <button type="submit" class="btn btn-warning">Export</button>
+  </form>
+  <form action="/import">
+    <button type="submit" class="btn btn-warning">Import</button>
+  </form>
+</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for name, product in products.items() %}
+      <tr>
+        <th scope="row"></th>
+        <td>{{ product.name }}</td>
+        <td>{{ product.unit }}</td>
+        <td>{{ product.unit_price }} PLN</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.unit_price * product.quantity }} PLN</td>
+        <td><a href="/sell/{{ product.name }}" type="submit" class="btn btn-danger btn-sm">Sell</a></td>
+      </tr>
+    {% endfor %}
+      <form method="POST" action="/products">
+        <tr>
+          {{ form.hidden_tag() }}
+          <th scope="row"></th>
+          <td>* {{ form.name }}</td>
+          <td>* {{ form.unit }}</td>
+          <td>* {{ form.unit_price }}</td>
+          <td>* {{ form.quantity }}</td>
+          <td></td>
+          <td><button type="submit" class="btn btn-success btn-sm">Add</button></td>
+        </tr>
+      </form>
+    </tbody>
+</table>
+{{klasa}}
+
+{% endblock %}

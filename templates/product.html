@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Data</th>
+        <th scope="col">Values</th>
+        <th scope="col">Sell</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Name</th>
+        <td>{{ data.name }}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">Unit</th>
+        <td>{{ data.unit }}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">Unit_price</th>
+        <td>{{ data.unit_price }} PLN</td>
+        <td>Podaj ilość do sprzedaży:</td>
+      </tr>
+      <tr>
+        <th scope="row">Quantity:</th>
+        <td>{{ data.quantity }}</td>
+        <form method="POST" action="/sell/{{data.name}}">
+            <td>{{ form.quantity }} <button type="submit" class="btn btn-danger btn-sm">Sprzedaj</button></td>
+        </form>
+      </tr>
+    </tbody>
+</table>
+{% endblock %}
